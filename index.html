@@ -1,0 +1,126 @@
+<html>
+<head>
+  <title>Pokemon Fight Simulator</title>
+
+  <!-- Favicon -->
+  <link href="assets/images/favicon.ico" rel="icon" type="image/x-icon" />
+
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  
+  <!-- Bootstrap Theme -->
+  <link rel="stylesheet" href="https://bootswatch.com/flatly/bootstrap.min.css">
+
+  <!-- jQuery -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+  <!-- Javascript -->
+  <script type="text/javascript" src="assets/javascript/game.js"></script>
+
+  <!-- Reset CSS -->
+  <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
+
+  <!-- My CSS -->
+  <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+
+</head>
+
+<body>
+
+<!-- Main Container -->
+<div class="container-fluid main">
+  
+  <!-- Main Row -->
+  <div class="row">
+
+    <!-- Left Side Column -->
+    <div class="col-md-6">
+
+      <h2>Instructions:</h2>
+      <h2>Click your fighter to begin!</h2>
+      <h2>An enemy will be chosen afterwards to defeat.</h2>
+
+      <div class="row fighters">
+
+        <div class="col-md-3">
+          <!-- Pikachu -->
+          <img class="pikachu friendlyFighter" src="assets/images/pikachu.gif" name="pikachu">
+
+          <p class="fighterDescription" id="pikachuDescription">Pikachu</p>
+
+        </div>
+
+        <div class="col-md-3">
+          <!-- Bulbasaur -->
+          <img class="bulbasaur friendlyFighter" src="assets/images/bulbasaur.gif" name="bulbasaur">
+
+          <p class="fighterDescription" id="bulbasaurDescription">Bulbasaur</p>
+
+        </div>
+
+        <div class="col-md-3">
+          <!-- Squirtle -->
+          <img class="squirtle friendlyFighter" src="assets/images/squirtle.gif" name="squirtle">
+
+          <p class="fighterDescription" id="squirtleDescription">Squirtle</p>
+
+        </div>
+        
+        <div class="col-md-3">
+          <!-- Charmander -->
+          <img class="charmander friendlyFighter" src="assets/images/charmander.gif" name="charmander">
+
+          <p class="fighterDescription" id="charmanderDescription">Charmander</p>
+        </div>
+
+      </div>
+
+
+      <div id="defeated" class="row">
+        
+        <h2>Defeated Pokemon:</h2>
+        
+        <div id="defeatedLeft" class="col-md-4">
+
+        </div>
+    
+        <div id="defeatedMiddle" class="col-md-4">
+
+        </div>
+
+        <div id="defeatedRight" class="col-md-4">
+
+        </div>
+
+
+      </div>
+
+    </div>
+
+    <!-- Right Side Column -->
+    <div class="col-md-6 rightSide">
+
+      <!-- The Right Side -->
+      <div class="row">
+        <!-- Your Fighter Goes Here -->
+        <div class="col-md-6 rightSideLeft">
+
+        </div>
+
+        <!-- Enemy Fighter Goes Here -->
+        <div class="col-md-6 rightSideRight">
+
+        </div>
+
+      </div>
+    
+    </div>
+
+  </div>
+
+
+</div>
+
+</body>
+
+</html>
