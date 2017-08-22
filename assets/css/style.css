@@ -13,6 +13,7 @@
   width: 200px;
   padding: 5px;
   background-color: #118111; 
+  transform: scaleX(-1);
 }
 
 .enemyFighter {

@@ -408,19 +408,26 @@ $(document).ready(function() {
 
     //Gotta have potions left.
     if (potionsLeft > 0){
-      potionsLeft--;
-      console.log("You have " + potionsLeft + " potions left to use.");
-      $("#potionsLeft").text("Potions Left: " + potionsLeft);
-
       if (yourObject.HP > 80){
-        yourObject.HP = 100;
-        console.log("You healed to 100.");
-        $(yourHP).text(yourObject.HP + " / 100");
+        if (yourObject.HP !== 100){
+          potionsLeft--;
+          console.log("You have " + potionsLeft + " potions left to use.");
+          $("#potionsLeft").text("Potions Left: " + potionsLeft);
+          yourObject.HP = 100;
+          console.log("You healed to 100.");
+          $(yourHP).text(yourObject.HP + " / 100");
+        }  
+        else {
+          console.log("You already have full health.");
+        }
       }
       else if (yourObject.HP < 1){
         console.log("You are already dead.");
       }
       else {
+        potionsLeft--;
+        console.log("You have " + potionsLeft + " potions left to use.");
+        $("#potionsLeft").text("Potions Left: " + potionsLeft);
         yourObject.HP = yourObject.HP + potionHealing;
         console.log("You healed for 20 points of damage.");
         $(yourHP).text(yourObject.HP + " / 100");
