@@ -13,24 +13,38 @@ var wins = 0;
 
 $(document).ready(function() {
 
+  $('#attackButton').prop('disabled', true);
+
   var pikachuObject = {
     name: "pikachu",
-    type: "electric"
+    type: "electric",
+    strongAgainst: ["water"],
+    weakAgainst: [],
+    HP: 100
   }
 
   var bulbasaurObject = {
     name: "bulbasaur",
-    type: "grass"
+    type: "grass",
+    strongAgainst: ["water"],
+    weakAgainst: ["fire"],
+    HP: 100
   }
 
   var squirtleObject = {
     name: "squirtle",
-    type: "water"
+    type: "water",
+    strongAgainst: ["fire"],
+    weakAgainst: ["grass"],
+    HP: 100
   }
 
   var charmanderObject = {
     name: "charmander",
-    type: "fire"
+    type: "fire",
+    strongAgainst: ["grass"],
+    weakAgainst: ["water"],
+    HP: 100
   }
 
   //For Debugging. Not in final build.
@@ -56,8 +70,12 @@ $(document).ready(function() {
         console.log("Your enemy was chosen: " + enemyChosen);
         console.log("this: " + this);
         enemyName = $(this).attr("name");
+        console.log("Your enemy is: " + enemyName);
         moveEnemy(enemyScope);
         setEnemy(enemyName);
+
+        //Create Attack Button
+        createButton();
         
       }
       else {
@@ -75,6 +93,7 @@ $(document).ready(function() {
       console.log("Your fighter was chosen: " + fighterChosen);
       console.log("this: " + this);
       yourName = $(this).attr("name");
+      console.log("Your fighter is: " + yourName);
       moveYourFighter(yourScope);
       setYourFighter(yourName);
       
@@ -83,35 +102,54 @@ $(document).ready(function() {
   });
 
 
+  $("#attackButton").on("click", function(){
+    console.log("Attack button was pressed.");
+    attackButtonPressed();
+  });
+
+
   function moveEnemy(enemy){
-    var moveDesc = "#" + enemyName + "Description";
-    console.log ("Move Description: " + moveDesc);
+    //Makes sure this only runs before the win condition is met.
+    if (wins < 3){
+      var moveDesc = "#" + enemyName + "Description";
+      var enemyHPMove = "#" + enemyName + "HP";
 
-    console.log("Passed along: " + enemy);
-    $(enemy).attr('src', 'assets/images/' + $(enemy).attr("name") + '-attack.gif');
-    $(enemy).appendTo($(".rightSideRight"));
+      // Move enemy image, after making it the "Attack" version.
+      $(enemy).attr('src', 'assets/images/' + enemyName + '-attack.gif');
+      $(enemy).appendTo($(".rightSideRight"));
 
-    console.log("Moving Pokemon Description too.");
-    $(moveDesc).appendTo($(".rightSideRight"));
+      // Move enemy description.
+      $(moveDesc).appendTo($(".rightSideRight"));
 
+      //Move enemy HP
+      $(enemyHPMove).appendTo($(".rightSideRight"));
+
+    }
+    else {
+      console.log("You already won the game.");
+    }
   }
 
   function moveYourFighter(yourFighter){
     var moveDesc = "#" + yourName + "Description";
-    console.log ("Move Description: " + moveDesc);
+    var yourHPMove = "#" + yourName + "HP";
 
-    console.log("Passed along: " + yourFighter);
+    // Move your image, after making it the "Attack" version.
     $(yourFighter).attr('src', 'assets/images/' + yourName + '-attack.gif');
     $(yourFighter).appendTo($(".rightSideLeft"));
 
-    console.log("Moving Pokemon Description too.");
+    // Move your description.
     $(moveDesc).appendTo($(".rightSideLeft"));
+
+    //Move your HP.
+    $(yourHPMove).appendTo($(".rightSideLeft"));
 
   }
 
   function clearEnemy(){
     wins ++;
     var moveDesc = "#" + enemyName + "Description";
+    var enemyHPMove = "#" + enemyName + "HP";
 
     $(enemyScope).attr('src', 'assets/images/' + $(enemyScope).attr("name") + '.gif');
     $(enemyScope).addClass('defeatedFighter');
@@ -121,17 +159,23 @@ $(document).ready(function() {
       console.log("Moving the enemy to defeatedLeft. Wins: " + wins);
       $(enemyScope).appendTo($("#defeatedLeft"));
       $(moveDesc).appendTo($("#defeatedLeft"));
+      $(enemyHPMove).appendTo($("#defeatedLeft"));
     }
     else if ( wins === 2 ){
       console.log("Moving the enemy to defeatedMiddle. Wins: " + wins);
       $(enemyScope).appendTo($("#defeatedMiddle"));
       $(moveDesc).appendTo($("#defeatedMiddle"));
+      $(enemyHPMove).appendTo($("#defeatedMiddle"));
     }
-    else if ( wins > 2 ){
+    else if ( wins === 3 ){
       console.log("Moving the enemy to defeatedRight." + wins);
       $(enemyScope).appendTo($("#defeatedRight"));
       $(moveDesc).appendTo($("#defeatedRight"));
+      $(enemyHPMove).appendTo($("#defeatedRight"));
       alert("You beat all the enemy Pokemon! You win!");
+    }
+    else {
+      console.log("Something is wrong. Wins: " + wins);
     }
 
     enemyChosen = false;
@@ -174,7 +218,62 @@ $(document).ready(function() {
     }
   }
 
+  function createButton(){
+    $('#attackButton').prop('disabled', false);
+    var yourDmg = $("<p id='yourDamage'>");
+    var enemyDmg = $("<p id='enemyDamage'>");
+
+    $("#damageArea").append(yourDmg);
+    $("#damageArea").append(enemyDmg);
+  }
   
+  function attackButtonPressed(){
+    var enemyDamage = 10;
+    var yourDamage = 10;
+    var yourHP = "#" + yourName + "HP";
+    var enemyHP = "#" + enemyName + "HP";
+
+    // console.log("Attack button function executed.");
+    console.log("Your type is: " + yourObject.type);
+    console.log("You are weak to: " + yourObject.weakAgainst);
+
+    console.log("Enemy type is: " + enemyObject.type);
+    console.log("Enemy is weak to: " + enemyObject.weakAgainst);
+
+    //Super Effective for your fighter.
+    if (enemyObject.weakAgainst.indexOf(yourObject.type) !== -1) {
+      console.log("It was super effective against " + enemyName);
+      yourDamage = (yourDamage * 2);
+      enemyDamage = (enemyDamage / 2);
+    }
+    //Super Effective against your fighter.
+    else if (yourObject.weakAgainst.indexOf(enemyObject.type) !== -1) {
+      console.log("It was super effective against " + yourName);
+      yourDamage = (yourDamage / 2);
+      enemyDamage = (enemyDamage * 2);
+    }
+
+    yourObject.HP = yourObject.HP - enemyDamage;
+    console.log("You were attacked for " + enemyDamage + ".");
+    $("#enemyDamage").text("You were attacked for " + enemyDamage + ".");
+    $(yourHP).text(yourObject.HP + " / 100");
+
+
+    enemyObject.HP = enemyObject.HP - yourDamage;
+    console.log("The enemy was attacked for " + yourDamage + ".");
+    $("#yourDamage").text("The enemy was attacked for " + yourDamage + ".");
+    $(enemyHP).text(enemyObject.HP + " / 100");
+
+    if (yourObject.HP < 1) {
+      alert("You lose! Refresh to play again.");
+    }
+    else if (enemyObject.HP < 1) {
+      clearEnemy();
+      console.log(enemyName + " has been defeated.");
+    }
+
+
+  }
   
 
 });

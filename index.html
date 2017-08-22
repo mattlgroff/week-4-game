@@ -34,7 +34,7 @@
   <div class="row">
 
     <!-- Left Side Column -->
-    <div class="col-md-6">
+    <div class="col-md-6 col-sm-6 col-xs-6">
 
       <h2>Instructions:</h2>
       <h2>Click your fighter to begin!</h2>
@@ -42,35 +42,39 @@
 
       <div class="row fighters">
 
-        <div class="col-md-3">
+        <div class="col-md-3 col-sm-3 col-xs-3">
           <!-- Pikachu -->
           <img class="pikachu friendlyFighter" src="assets/images/pikachu.gif" name="pikachu">
 
           <p class="fighterDescription" id="pikachuDescription">Pikachu</p>
+          <p class="fullHP" id="pikachuHP">100 / 100</p>
 
         </div>
 
-        <div class="col-md-3">
+        <div class="col-md-3 col-sm-3 col-xs-3">
           <!-- Bulbasaur -->
           <img class="bulbasaur friendlyFighter" src="assets/images/bulbasaur.gif" name="bulbasaur">
 
           <p class="fighterDescription" id="bulbasaurDescription">Bulbasaur</p>
+          <p class="fullHP" id="bulbasaurHP">100 / 100</p>
 
         </div>
 
-        <div class="col-md-3">
+        <div class="col-md-3 col-sm-3 col-xs-3">
           <!-- Squirtle -->
           <img class="squirtle friendlyFighter" src="assets/images/squirtle.gif" name="squirtle">
 
           <p class="fighterDescription" id="squirtleDescription">Squirtle</p>
+          <p class="fullHP" id="squirtleHP">100 / 100</p>
 
         </div>
         
-        <div class="col-md-3">
+        <div class="col-md-3 col-sm-3 col-xs-3">
           <!-- Charmander -->
           <img class="charmander friendlyFighter" src="assets/images/charmander.gif" name="charmander">
 
           <p class="fighterDescription" id="charmanderDescription">Charmander</p>
+          <p class="fullHP" id="charmanderHP">100 / 100</p>
         </div>
 
       </div>
@@ -80,15 +84,15 @@
         
         <h2>Defeated Pokemon:</h2>
         
-        <div id="defeatedLeft" class="col-md-4">
+        <div id="defeatedLeft" class="col-md-4 col-sm-4 col-xs-4">
 
         </div>
     
-        <div id="defeatedMiddle" class="col-md-4">
+        <div id="defeatedMiddle" class="col-md-4 col-sm-4 col-xs-4">
 
         </div>
 
-        <div id="defeatedRight" class="col-md-4">
+        <div id="defeatedRight" class="col-md-4 col-sm-4 col-xs-4">
 
         </div>
 
@@ -98,20 +102,25 @@
     </div>
 
     <!-- Right Side Column -->
-    <div class="col-md-6 rightSide">
+    <div class="col-md-6 col-sm-6 col-xs-6 rightSide">
 
-      <!-- The Right Side -->
+      <!-- The Right Side Top -->
       <div class="row">
         <!-- Your Fighter Goes Here -->
-        <div class="col-md-6 rightSideLeft">
+        <div class="col-md-6 col-sm-6 col-xs-6 rightSideLeft">
 
         </div>
 
         <!-- Enemy Fighter Goes Here -->
-        <div class="col-md-6 rightSideRight">
+        <div class="col-md-6 col-sm-6 col-xs-6 rightSideRight">
 
         </div>
 
+      </div>
+
+      <!-- The Right Side Bottom. Attack button goes in here. -->
+      <div class="row" id="damageArea">
+        <button class="btn" id="attackButton">Attack</button>
       </div>
     
     </div>

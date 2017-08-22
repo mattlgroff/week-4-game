@@ -1,6 +1,6 @@
 .fighters {
 	padding: 50px;
-	background-image: url("../images/fightBackground.png");
+	/*background-image: url("../images/fightBackground.png");*/
 }
 
 .friendlyFighter {
@@ -32,3 +32,16 @@
   background-color: #000;
   padding: 50px;
 }
+
+.fullHP {
+  color: #118111;
+}
+
+.noHP {
+  color: #FF7F65;
+}
+
+#attackButton {
+  color: #000;
+}
+
