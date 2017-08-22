@@ -50,9 +50,9 @@ $(document).ready(function() {
   }
 
   //For Debugging. Not in final build.
-  // $("#defeated").on("click", function(){
-  //   clearEnemy();
-  // });
+  $("#newGameButton").on("click", function(){
+    newGame();
+  });
   
   $(".friendlyFighter").on("click", function(){
 
@@ -203,6 +203,106 @@ $(document).ready(function() {
 
   }
 
+  function newGame(){
+    //Set wins and potions and HP back to default
+    wins = 0;
+    potionsLeft = 10;
+    enemyChosen = false;
+    fighterChosen = false;
+
+    $("#potionsLeft").text("Potions Left: " + potionsLeft);
+
+    //Set the Instructions
+    $("#instruction1").text("Instructions:");
+    $("#instruction2").text("Click to choose your Pokemon!");
+    $("#instruction3").text("");
+
+    //Your Fighter
+    var yourHP = "#" + yourName + "HP";
+    var moveYourDesc = "#" + enemyName + "Description";
+    $(".yourFighter").appendTo($("#" + yourName + "Div"));
+    $(moveYourDesc).appendTo($("#" + yourName + "Div"));
+    $(yourHP).appendTo($("#" + yourName + "Div"));
+    $().appendTo($("#" + yourName + "Div"));
+    $(".yourFighter").attr('src', 'assets/images/' + yourName + '.gif');
+    $(".yourFighter").removeClass('yourFighter');
+
+    //Enemy Fighter
+    var enemyHP = "#" + enemyName + "HP";
+    var moveEnemyDesc = "#" + enemyName + "Description";
+    $(".enemyFighter").appendTo($("#" + enemyName + "Div"));
+    $(moveEnemyDesc).appendTo($("#" + enemyName + "Div"));
+    $(enemyHP).appendTo($("#" + enemyName + "Div"));
+    $(".enemyFighter").attr('src', 'assets/images/' + enemyName + '.gif');
+    $(".enemyFighter").removeClass('enemyFighter');
+
+    enemyName = "";
+    yourName = "";
+
+    //Pikachu
+    $(".pikachu").appendTo($("#pikachuDiv"));
+    $("#pikachuDescription").appendTo($("#pikachuDiv"));
+    $("#pikachuHP").appendTo($("#pikachuDiv"));
+    $(".pikachu").removeClass('yourFighter');
+    $(".pikachu").removeClass('enemyFighter');
+    $(".pikachu").removeClass('defeatedFighter');
+    $("#pikachuHP").removeClass('noHP');
+    $(".pikachu").addClass('friendlyFighter');
+    $("#pikachuHP").addClass('fullHP');
+    pikachuObject.HP = 100;
+    $("#pikachuHP").text(pikachuObject.HP + " / " + pikachuObject.HP);
+    $(".pikachu").attr('src', 'assets/images/pikachu.gif');
+
+    //Bulbasaur
+    $(".bulbasaur").appendTo($("#bulbasaurDiv"));
+    $("#bulbasaurDescription").appendTo($("#bulbasaurDiv"));
+    $("#bulbasaurHP").appendTo($("#bulbasaurDiv"));
+    $(".bulbasaur").removeClass('yourFighter');
+    $(".bulbasaur").removeClass('enemyFighter');
+    $(".bulbasaur").removeClass('defeatedFighter');
+    $("#bulbasaurHP").removeClass('noHP');
+    $(".bulbasaur").addClass('friendlyFighter');
+    $("#bulbasaurHP").addClass('fullHP');
+    bulbasaurObject.HP = 100;
+    $("#bulbasaurHP").text(bulbasaurObject.HP + " / " + bulbasaurObject.HP);
+    $(".bulbasaur").attr('src', 'assets/images/bulbasaur.gif');
+
+    //Squirtle
+    $(".squirtle").appendTo($("#squirtleDiv"));
+    $("#squirtleDescription").appendTo($("#squirtleDiv"));
+    $("#squirtleHP").appendTo($("#squirtleDiv"));
+    $(".squirtle").removeClass('yourFighter');
+    $(".squirtle").removeClass('enemyFighter');
+    $(".squirtle").removeClass('defeatedFighter');
+    $("#squirtleHP").removeClass('noHP');
+    $(".squirtle").addClass('friendlyFighter');
+    $("#squirtleHP").addClass('fullHP');
+    squirtleObject.HP = 100;
+    $("#squirtleHP").text(squirtleObject.HP + " / " + squirtleObject.HP);
+    $(".squirtle").attr('src', 'assets/images/squirtle.gif');
+
+    //Charmander
+    $(".charmander").appendTo($("#charmanderDiv"));
+    $("#charmanderDescription").appendTo($("#charmanderDiv"));
+    $("#charmanderHP").appendTo($("#charmanderDiv"));
+    $(".charmander").removeClass('yourFighter');
+    $(".charmander").removeClass('enemyFighter');
+    $(".charmander").removeClass('defeatedFighter');
+    $("#charmanderHP").removeClass('noHP');
+    $(".charmander").addClass('friendlyFighter');
+    $("#charmanderHP").addClass('fullHP');
+    charmanderObject.HP = 100;
+    $("#charmanderHP").text(charmanderObject.HP + " / " + charmanderObject.HP);
+    $(".charmander").attr('src', 'assets/images/charmander.gif');
+
+    //Damage text
+    $("#yourDamage").text("");
+    $("#enemyDamage").text("");
+
+
+
+  }
+
   function setEnemy(){
     if (enemyName === "pikachu"){
       enemyObject = pikachuObject;
@@ -251,51 +351,54 @@ $(document).ready(function() {
   }
   
   function attackButtonPressed(){
-    var enemyDamage = getRandomIntInclusive(25, 15);
-    var yourDamage = getRandomIntInclusive(25, 15);
-    var yourHP = "#" + yourName + "HP";
-    var enemyHP = "#" + enemyName + "HP";
+    if (enemyChosen){
+      var enemyDamage = getRandomIntInclusive(25, 15);
+      var yourDamage = getRandomIntInclusive(25, 15);
+      var yourHP = "#" + yourName + "HP";
+      var enemyHP = "#" + enemyName + "HP";
 
-    // console.log("Attack button function executed.");
-    console.log("Your type is: " + yourObject.type);
-    console.log("You are weak to: " + yourObject.weakAgainst);
+      // console.log("Attack button function executed.");
+      console.log("Your type is: " + yourObject.type);
+      console.log("You are weak to: " + yourObject.weakAgainst);
 
-    console.log("Enemy type is: " + enemyObject.type);
-    console.log("Enemy is weak to: " + enemyObject.weakAgainst);
+      console.log("Enemy type is: " + enemyObject.type);
+      console.log("Enemy is weak to: " + enemyObject.weakAgainst);
 
-    //Super Effective for your fighter.
-    if (enemyObject.weakAgainst.indexOf(yourObject.type) !== -1) {
-      console.log("It was super effective against " + enemyName);
-      yourDamage = (yourDamage * 2);
+      //Super Effective for your fighter.
+      if (enemyObject.weakAgainst.indexOf(yourObject.type) !== -1) {
+        console.log("It was super effective against " + enemyName);
+        yourDamage = (yourDamage * 2);
+      }
+      //Super Effective against your fighter.
+      else if (yourObject.weakAgainst.indexOf(enemyObject.type) !== -1) {
+        console.log("It was super effective against " + yourName);
+        enemyDamage = (enemyDamage * 2);
+      }
+
+      yourObject.HP = yourObject.HP - enemyDamage;
+      console.log("You were attacked for " + enemyDamage + ".");
+      $("#enemyDamage").text("You were attacked for " + enemyDamage + ".");
+      $(yourHP).text(yourObject.HP + " / 100");
+
+
+      enemyObject.HP = enemyObject.HP - yourDamage;
+      console.log("The enemy was attacked for " + yourDamage + ".");
+      $("#yourDamage").text("The enemy was attacked for " + yourDamage + ".");
+      $(enemyHP).text(enemyObject.HP + " / 100");
+
+      if (yourObject.HP < 1) {
+        $("#instruction1").text("You lose!");
+        $("#instruction2").text("Try to fight weaker enemies first!");
+        $("#instruction3").text("Save your potions for tough fights. They heal for 20 HP.");
+      }
+      else if (enemyObject.HP < 1) {
+        clearEnemy();
+        console.log(enemyName + " has been defeated.");
+      }
+    }  
+    else {
+      console.log ("You cannot attack nothing.");
     }
-    //Super Effective against your fighter.
-    else if (yourObject.weakAgainst.indexOf(enemyObject.type) !== -1) {
-      console.log("It was super effective against " + yourName);
-      enemyDamage = (enemyDamage * 2);
-    }
-
-    yourObject.HP = yourObject.HP - enemyDamage;
-    console.log("You were attacked for " + enemyDamage + ".");
-    $("#enemyDamage").text("You were attacked for " + enemyDamage + ".");
-    $(yourHP).text(yourObject.HP + " / 100");
-
-
-    enemyObject.HP = enemyObject.HP - yourDamage;
-    console.log("The enemy was attacked for " + yourDamage + ".");
-    $("#yourDamage").text("The enemy was attacked for " + yourDamage + ".");
-    $(enemyHP).text(enemyObject.HP + " / 100");
-
-    if (yourObject.HP < 1) {
-      $("#instruction1").text("You lose!");
-      $("#instruction2").text("Try to fight weaker enemies first!");
-      $("#instruction3").text("Save your potions for tough fights. They heal for 20 HP.");
-      alert("You lose! Refresh to play again.");
-    }
-    else if (enemyObject.HP < 1) {
-      clearEnemy();
-      console.log(enemyName + " has been defeated.");
-    }
-
 
   }
 
