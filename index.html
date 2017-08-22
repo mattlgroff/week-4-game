@@ -36,9 +36,9 @@
     <!-- Left Side Column -->
     <div class="col-md-6 col-sm-6 col-xs-6">
 
-      <h2>Instructions:</h2>
-      <h2>Click your fighter to begin!</h2>
-      <h2>An enemy will be chosen afterwards to defeat.</h2>
+      <h2 id="instruction1">Instructions:</h2>
+      <h2 id="instruction2">Click to choose your Pokemon!</h2>
+      <h2 id="instruction3"></h2>
 
       <div class="row fighters">
 
@@ -119,8 +119,16 @@
       </div>
 
       <!-- The Right Side Bottom. Attack button goes in here. -->
-      <div class="row" id="damageArea">
-        <button class="btn" id="attackButton">Attack</button>
+      <div class="row">
+        <div id="healingArea" class="col-md-6 col-sm-6 col-xs-6">      
+          <button class="btn" id="potionButton">Potion</button>
+          <p id="potionsLeft">Potions Left: 10</p>
+        </div>
+
+        <div id="damageArea" class="col-md-6 col-sm-6 col-xs-6">
+          <button class="btn" id="attackButton">Attack</button>
+        </div>
+
       </div>
     
     </div>

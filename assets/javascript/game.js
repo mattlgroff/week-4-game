@@ -9,11 +9,13 @@ var yourObject = {
 var yourScope = "";
 var enemyScope = "";
 var wins = 0;
+var potionsLeft = 10;
 
 
 $(document).ready(function() {
 
   $('#attackButton').prop('disabled', true);
+  $('#potionButton').prop('disabled', true);
 
   var pikachuObject = {
     name: "pikachu",
@@ -35,7 +37,7 @@ $(document).ready(function() {
     name: "squirtle",
     type: "water",
     strongAgainst: ["fire"],
-    weakAgainst: ["grass"],
+    weakAgainst: ["grass","electric"],
     HP: 100
   }
 
@@ -48,12 +50,9 @@ $(document).ready(function() {
   }
 
   //For Debugging. Not in final build.
-  $("#defeated").on("click", function(){
-    clearEnemy();
-  });
-
-
-  
+  // $("#defeated").on("click", function(){
+  //   clearEnemy();
+  // });
   
   $(".friendlyFighter").on("click", function(){
 
@@ -76,6 +75,9 @@ $(document).ready(function() {
 
         //Create Attack Button
         createButton();
+
+        $("#instruction2").text("Click Attack to complete a turn.");
+        $("#instruction3").text("Click Potion to heal. (Tip: Save them for a tough fight.)");
         
       }
       else {
@@ -96,17 +98,24 @@ $(document).ready(function() {
       console.log("Your fighter is: " + yourName);
       moveYourFighter(yourScope);
       setYourFighter(yourName);
+
+      $("#instruction2").text("Click the Pokemon you want to fight first.");
       
     }
 
   });
 
-
+  //Attack Button on Click
   $("#attackButton").on("click", function(){
     console.log("Attack button was pressed.");
     attackButtonPressed();
   });
 
+  //Potion Button on click
+  $("#potionButton").on("click", function(){
+    console.log("Potion button was pressed.");
+    potionButtonPressed();
+  });
 
   function moveEnemy(enemy){
     //Makes sure this only runs before the win condition is met.
@@ -144,6 +153,7 @@ $(document).ready(function() {
     //Move your HP.
     $(yourHPMove).appendTo($(".rightSideLeft"));
 
+
   }
 
   function clearEnemy(){
@@ -154,6 +164,11 @@ $(document).ready(function() {
     $(enemyScope).attr('src', 'assets/images/' + $(enemyScope).attr("name") + '.gif');
     $(enemyScope).addClass('defeatedFighter');
     $(enemyScope).removeClass('enemyFighter');
+
+    $(enemyHPMove).text("0 / 100");
+    $(enemyHPMove).addClass('noHP');
+    $(enemyHPMove).removeClass('fullHP');
+
 
     if ( wins === 1 ){
       console.log("Moving the enemy to defeatedLeft. Wins: " + wins);
@@ -172,6 +187,9 @@ $(document).ready(function() {
       $(enemyScope).appendTo($("#defeatedRight"));
       $(moveDesc).appendTo($("#defeatedRight"));
       $(enemyHPMove).appendTo($("#defeatedRight"));
+      $("#instruction1").text("Congrats!");
+      $("#instruction2").text("You defeated all 3 enemy Pokemon.");
+      $("#instruction3").text("Refresh the page for a new game.");
       alert("You beat all the enemy Pokemon! You win!");
     }
     else {
@@ -179,6 +197,9 @@ $(document).ready(function() {
     }
 
     enemyChosen = false;
+    potionsLeft = potionsLeft + 2;
+    $("#potionsLeft").text("Potions Left: " + potionsLeft);
+    console.log("You found 2 potions.");
 
   }
 
@@ -220,6 +241,8 @@ $(document).ready(function() {
 
   function createButton(){
     $('#attackButton').prop('disabled', false);
+
+    $('#potionButton').prop('disabled', false);
     var yourDmg = $("<p id='yourDamage'>");
     var enemyDmg = $("<p id='enemyDamage'>");
 
@@ -228,8 +251,8 @@ $(document).ready(function() {
   }
   
   function attackButtonPressed(){
-    var enemyDamage = 10;
-    var yourDamage = 10;
+    var enemyDamage = getRandomIntInclusive(25, 15);
+    var yourDamage = getRandomIntInclusive(25, 15);
     var yourHP = "#" + yourName + "HP";
     var enemyHP = "#" + enemyName + "HP";
 
@@ -244,12 +267,10 @@ $(document).ready(function() {
     if (enemyObject.weakAgainst.indexOf(yourObject.type) !== -1) {
       console.log("It was super effective against " + enemyName);
       yourDamage = (yourDamage * 2);
-      enemyDamage = (enemyDamage / 2);
     }
     //Super Effective against your fighter.
     else if (yourObject.weakAgainst.indexOf(enemyObject.type) !== -1) {
       console.log("It was super effective against " + yourName);
-      yourDamage = (yourDamage / 2);
       enemyDamage = (enemyDamage * 2);
     }
 
@@ -265,6 +286,9 @@ $(document).ready(function() {
     $(enemyHP).text(enemyObject.HP + " / 100");
 
     if (yourObject.HP < 1) {
+      $("#instruction1").text("You lose!");
+      $("#instruction2").text("Try to fight weaker enemies first!");
+      $("#instruction3").text("Save your potions for tough fights. They heal for 20 HP.");
       alert("You lose! Refresh to play again.");
     }
     else if (enemyObject.HP < 1) {
@@ -274,6 +298,44 @@ $(document).ready(function() {
 
 
   }
+
+  function potionButtonPressed(){
+    var potionHealing = 20;
+    var yourHP = "#" + yourName + "HP";
+
+    //Gotta have potions left.
+    if (potionsLeft > 0){
+      potionsLeft--;
+      console.log("You have " + potionsLeft + " potions left to use.");
+      $("#potionsLeft").text("Potions Left: " + potionsLeft);
+
+      if (yourObject.HP > 80){
+        yourObject.HP = 100;
+        console.log("You healed to 100.");
+        $(yourHP).text(yourObject.HP + " / 100");
+      }
+      else if (yourObject.HP < 1){
+        console.log("You are already dead.");
+      }
+      else {
+        yourObject.HP = yourObject.HP + potionHealing;
+        console.log("You healed for 20 points of damage.");
+        $(yourHP).text(yourObject.HP + " / 100");
+      }
+        
+    }
+    else {
+      console.log ("Error! You are out of potions.");
+    }
+      
+  }
+
+  function getRandomIntInclusive(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min; //The maximum is inclusive and the minimum is inclusive 
+  }
+    
   
 
 });
