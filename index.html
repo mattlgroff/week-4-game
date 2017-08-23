@@ -26,122 +26,146 @@
 </head>
 
 <body>
+  <!-- Pikachu -->
+  <audio id="pikachuSound" src="assets/audio/pikachu.wav"></audio>
 
-<!-- Main Container -->
-<div class="container-fluid main">
-  
-  <!-- Main Row -->
-  <div class="row">
+  <!-- Bulbasaur -->
+  <audio id="bulbasaurSound" src="assets/audio/bulbasaur.wav"></audio>
 
-    <!-- Left Side Column -->
-    <div class="col-md-6 col-sm-6 col-xs-6">
+  <!-- Squirtle -->
+  <audio id="squirtleSound" src="assets/audio/squirtle.wav"></audio>
 
-      <h2 id="instruction1">Instructions:</h2>
-      <h2 id="instruction2">Click to choose your Pokemon!</h2>
-      <h2 id="instruction3"></h2>
+  <!-- Charmander -->
+  <audio id="charmanderSound" src="assets/audio/charmander.wav"></audio>
 
-      <div class="row fighters">
+  <!-- Battle -->
+  <audio id="battleSound" src="assets/audio/battle.mp3"></audio>
 
-        <div id="pikachuDiv" class="col-md-3 col-sm-3 col-xs-3">
-          <!-- Pikachu -->
-          <img class="pikachu friendlyFighter" src="assets/images/pikachu.gif" name="pikachu">
+  <!-- Victory -->
+  <audio id="victorySound" src="assets/audio/victory.mp3"></audio>
 
-          <p class="fighterDescription" id="pikachuDescription">Pikachu</p>
-          <p class="fullHP" id="pikachuHP">100 / 100</p>
+  <!-- Potion -->
+  <audio id="potionSound" src="assets/audio/potion.wav"></audio>
 
-        </div>
-
-        <div id="bulbasaurDiv" class="col-md-3 col-sm-3 col-xs-3">
-          <!-- Bulbasaur -->
-          <img class="bulbasaur friendlyFighter" src="assets/images/bulbasaur.gif" name="bulbasaur">
-
-          <p class="fighterDescription" id="bulbasaurDescription">Bulbasaur</p>
-          <p class="fullHP" id="bulbasaurHP">100 / 100</p>
-
-        </div>
-
-        <div id="squirtleDiv" class="col-md-3 col-sm-3 col-xs-3">
-          <!-- Squirtle -->
-          <img class="squirtle friendlyFighter" src="assets/images/squirtle.gif" name="squirtle">
-
-          <p class="fighterDescription" id="squirtleDescription">Squirtle</p>
-          <p class="fullHP" id="squirtleHP">100 / 100</p>
-
-        </div>
-        
-        <div id="charmanderDiv" class="col-md-3 col-sm-3 col-xs-3">
-          <!-- Charmander -->
-          <img class="charmander friendlyFighter" src="assets/images/charmander.gif" name="charmander">
-
-          <p class="fighterDescription" id="charmanderDescription">Charmander</p>
-          <p class="fullHP" id="charmanderHP">100 / 100</p>
-        </div>
-
-      </div>
+  <!-- Attack -->
+  <audio id="attackSound" src="assets/audio/attack.wav"></audio>
 
 
-      <div id="defeated" class="row">
-        
-        <h2>Defeated Pokemon:</h2>
-        
-        <div id="defeatedLeft" class="col-md-4 col-sm-4 col-xs-4">
-
-        </div>
+  <!-- Main Container -->
+  <div class="container-fluid main">
     
-        <div id="defeatedMiddle" class="col-md-4 col-sm-4 col-xs-4">
+    <!-- Main Row -->
+    <div class="row">
+
+      <!-- Left Side Column -->
+      <div class="col-md-6 col-sm-6 col-xs-6">
+
+        <h2 id="instruction1">Instructions:</h2>
+        <h2 id="instruction2">Click to choose your Pokemon!</h2>
+        <h2 id="instruction3"></h2>
+
+        <div class="row fighters">
+
+          <div id="pikachuDiv" class="col-md-3 col-sm-3 col-xs-3">
+            <!-- Pikachu -->
+            <img class="pikachu friendlyFighter" src="assets/images/pikachu.gif" name="pikachu">
+
+            <p class="fighterDescription" id="pikachuDescription">Pikachu</p>
+            <p class="fullHP" id="pikachuHP">100 / 100</p>
+
+          </div>
+
+          <div id="bulbasaurDiv" class="col-md-3 col-sm-3 col-xs-3">
+            <!-- Bulbasaur -->
+            <img class="bulbasaur friendlyFighter" src="assets/images/bulbasaur.gif" name="bulbasaur">
+
+            <p class="fighterDescription" id="bulbasaurDescription">Bulbasaur</p>
+            <p class="fullHP" id="bulbasaurHP">100 / 100</p>
+
+          </div>
+
+          <div id="squirtleDiv" class="col-md-3 col-sm-3 col-xs-3">
+            <!-- Squirtle -->
+            <img class="squirtle friendlyFighter" src="assets/images/squirtle.gif" name="squirtle">
+
+            <p class="fighterDescription" id="squirtleDescription">Squirtle</p>
+            <p class="fullHP" id="squirtleHP">100 / 100</p>
+
+          </div>
+          
+          <div id="charmanderDiv" class="col-md-3 col-sm-3 col-xs-3">
+            <!-- Charmander -->
+            <img class="charmander friendlyFighter" src="assets/images/charmander.gif" name="charmander">
+
+            <p class="fighterDescription" id="charmanderDescription">Charmander</p>
+            <p class="fullHP" id="charmanderHP">100 / 100</p>
+          </div>
 
         </div>
 
-        <div id="defeatedRight" class="col-md-4 col-sm-4 col-xs-4">
+
+        <div id="defeated" class="row">
+          
+          <h2>Defeated Pokemon:</h2>
+          
+          <div id="defeatedLeft" class="col-md-4 col-sm-4 col-xs-4">
+
+          </div>
+      
+          <div id="defeatedMiddle" class="col-md-4 col-sm-4 col-xs-4">
+
+          </div>
+
+          <div id="defeatedRight" class="col-md-4 col-sm-4 col-xs-4">
+
+          </div>
+
 
         </div>
 
+        <div class="row">
+          <button class="btn" id="newGameButton">New Game</button>
+        </div>
 
       </div>
 
-      <div class="row">
-        <button class="btn" id="newGameButton">New Game</button>
+      <!-- Right Side Column -->
+      <div class="col-md-6 col-sm-6 col-xs-6 rightSide">
+
+        <!-- The Right Side Top -->
+        <div class="row">
+          <!-- Your Fighter Goes Here -->
+          <div class="col-md-6 col-sm-6 col-xs-6 rightSideLeft">
+
+          </div>
+
+          <!-- Enemy Fighter Goes Here -->
+          <div class="col-md-6 col-sm-6 col-xs-6 rightSideRight">
+
+          </div>
+
+        </div>
+
+        <!-- The Right Side Bottom. Attack button goes in here. -->
+        <div class="row">
+          <div id="healingArea" class="col-md-6 col-sm-6 col-xs-6">      
+            <button class="btn" id="potionButton">Potion</button>
+            <p id="potionsLeft">Potions Left: 10</p>
+          </div>
+
+          <div id="damageArea" class="col-md-6 col-sm-6 col-xs-6">
+            <button class="btn" id="attackButton">Attack</button>
+          </div>
+
+        </div>
+
+      
       </div>
 
     </div>
 
-    <!-- Right Side Column -->
-    <div class="col-md-6 col-sm-6 col-xs-6 rightSide">
-
-      <!-- The Right Side Top -->
-      <div class="row">
-        <!-- Your Fighter Goes Here -->
-        <div class="col-md-6 col-sm-6 col-xs-6 rightSideLeft">
-
-        </div>
-
-        <!-- Enemy Fighter Goes Here -->
-        <div class="col-md-6 col-sm-6 col-xs-6 rightSideRight">
-
-        </div>
-
-      </div>
-
-      <!-- The Right Side Bottom. Attack button goes in here. -->
-      <div class="row">
-        <div id="healingArea" class="col-md-6 col-sm-6 col-xs-6">      
-          <button class="btn" id="potionButton">Potion</button>
-          <p id="potionsLeft">Potions Left: 10</p>
-        </div>
-
-        <div id="damageArea" class="col-md-6 col-sm-6 col-xs-6">
-          <button class="btn" id="attackButton">Attack</button>
-        </div>
-
-      </div>
-
-    
-    </div>
 
   </div>
-
-
-</div>
 
 </body>
 

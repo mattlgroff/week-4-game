@@ -157,6 +157,12 @@ $(document).ready(function() {
   }
 
   function clearEnemy(){
+    //Pause BattleMusic
+    document.getElementById('battleSound').pause();
+    
+    //Play VictoryMusic
+    document.getElementById('victorySound').play();
+
     wins ++;
     var moveDesc = "#" + enemyName + "Description";
     var enemyHPMove = "#" + enemyName + "HP";
@@ -189,8 +195,7 @@ $(document).ready(function() {
       $(enemyHPMove).appendTo($("#defeatedRight"));
       $("#instruction1").text("Congrats!");
       $("#instruction2").text("You defeated all 3 enemy Pokemon.");
-      $("#instruction3").text("Refresh the page for a new game.");
-      alert("You beat all the enemy Pokemon! You win!");
+      $("#instruction3").text("Click 'New game' to begin again.");
     }
     else {
       console.log("Something is wrong. Wins: " + wins);
@@ -204,6 +209,10 @@ $(document).ready(function() {
   }
 
   function newGame(){
+    //Pause Music
+    document.getElementById('victorySound').pause();
+    document.getElementById('battleSound').pause();
+
     //Set wins and potions and HP back to default
     wins = 0;
     potionsLeft = 10;
@@ -319,6 +328,12 @@ $(document).ready(function() {
     else {
       console.log("Something is wrong with enemy name.")
     }
+
+    //Play Sound Effect for Enemy
+    var sound = enemyName + "Sound";
+    console.log(sound);
+    document.getElementById(sound).play();
+
   }
 
   function setYourFighter(){
@@ -337,6 +352,12 @@ $(document).ready(function() {
     else {
       console.log("Something is wrong with your fighter's name.")
     }
+
+    //Play Sound Effect for Your Fighter
+    var sound = yourName + "Sound";
+    console.log(sound);
+    document.getElementById(sound).play();
+
   }
 
   function createButton(){
@@ -348,10 +369,20 @@ $(document).ready(function() {
 
     $("#damageArea").append(yourDmg);
     $("#damageArea").append(enemyDmg);
+
+    //Pause Victory Music
+    document.getElementById('victorySound').pause();
+
+    //Play Battle Music
+    document.getElementById('battleSound').play();
   }
   
   function attackButtonPressed(){
     if (enemyChosen){
+
+      //Play Potion Sound
+      document.getElementById('attackSound').play();
+
       var enemyDamage = getRandomIntInclusive(25, 15);
       var yourDamage = getRandomIntInclusive(25, 15);
       var yourHP = "#" + yourName + "HP";
@@ -411,6 +442,10 @@ $(document).ready(function() {
       if (yourObject.HP > 80){
         if (yourObject.HP !== 100){
           potionsLeft--;
+
+          //Play Potion Sound
+          document.getElementById('potionSound').play();
+
           console.log("You have " + potionsLeft + " potions left to use.");
           $("#potionsLeft").text("Potions Left: " + potionsLeft);
           yourObject.HP = 100;
@@ -426,6 +461,10 @@ $(document).ready(function() {
       }
       else {
         potionsLeft--;
+
+        //Play Potion Sound
+        document.getElementById('potionSound').play();
+
         console.log("You have " + potionsLeft + " potions left to use.");
         $("#potionsLeft").text("Potions Left: " + potionsLeft);
         yourObject.HP = yourObject.HP + potionHealing;
