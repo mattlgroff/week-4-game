@@ -383,6 +383,15 @@ $(document).ready(function() {
       //Play Potion Sound
       document.getElementById('attackSound').play();
 
+      //Attack
+      $(".enemyFighter").animate({ right: '+=80' }, 400 ).delay( 400 );
+      $(".yourFighter").animate({ left: '+=80' }, 400 ).delay( 400 );
+
+      //Go Back
+      $(".enemyFighter").animate({ right: '-=80' }, 400 );
+      $(".yourFighter").animate({ left: '-=80' }, 400 );
+
+
       var enemyDamage = getRandomIntInclusive(25, 15);
       var yourDamage = getRandomIntInclusive(25, 15);
       var yourHP = "#" + yourName + "HP";

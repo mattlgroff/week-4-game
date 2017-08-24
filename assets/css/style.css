@@ -12,15 +12,17 @@
   height: 200px;
   width: 200px;
   padding: 5px;
-  background-color: #118111; 
+  /*background-color: #118111; */
   transform: scaleX(-1);
+  position: relative
 }
 
 .enemyFighter {
   height: 200px;
   width: 200px;
   padding: 5px;
-  background-color: #FF7F65;
+  /*background-color: #FF7F65;*/
+  position: relative
 }
 
 .fighterDescription {
@@ -45,4 +47,5 @@
 #attackButton #potionButton {
   color: #000;
 }
+
 
